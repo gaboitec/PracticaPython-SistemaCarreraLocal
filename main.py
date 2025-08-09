@@ -1,4 +1,16 @@
+def quick_sort(lista):
+    if len(lista) <= 1:
+        return lista
+
+    pivote = lista[0]
+    menores = [x for x in lista[1:] if x < pivote]
+    iguales = [x for x in lista if x == pivote]
+    mayores = [x for x in lista[1:] if x > pivote]
+
+    return quick_sort(menores) + iguales + quick_sort(mayores)
+
 participantes = []
+
 while True:
     print("\n## MENU DE OPCIONES ##")
     print("1. Agregar participantes")
@@ -40,3 +52,10 @@ while True:
                 print(participant)
 
         case "2":
+            print("\n## PARTICIPANTES ORDENADOS POR NOMBRE ##")
+
+            nombres_ordenados = quick_sort([p['nombre'] for p in participantes])
+            for nombre in nombres_ordenados:
+                for p in participantes:
+                    if p['nombre'] == nombre:
+                        print(f"{p['nombre']} - Dorsal: {p['numero']}")
