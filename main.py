@@ -59,3 +59,12 @@ while True:
                 for p in participantes:
                     if p['nombre'] == nombre:
                         print(f"{p['nombre']} - Dorsal: {p['numero']}")
+
+        case "3":
+            print("\n## PARTICIPANTES ORDENADOS POR EDAD ##")
+
+            edades_ordenadas = quick_sort([p['edad'] for p in participantes])
+            for edad in edades_ordenadas:
+                for p in participantes:
+                    if p['edad'] == edad:
+                        print(f"{p['nombre']} - Edad: {p['edad']} - Dorsal: {p['numero']}")
