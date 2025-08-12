@@ -1,3 +1,42 @@
+def ingreso_participates():
+    numero = -1
+
+    while numero < 0:
+        while True:
+            try:
+                numero = int(input(f"Ingrese el numero de dorsal del participante #{i + 1}: "))
+                if numero >= 0:
+                    break
+            except ValueError:
+                print("Dato inválido")
+
+        if numero not in participantes:
+            nombre = input("Ingrese el NOMBRE COMPLETO del participante: ")
+            edad = int(input("Ingrese la edad (años) del participante: "))
+
+            while True:
+                categoria = input("Ingrese la categoria del participante (juvenil/adulto/master): ")
+                if categoria == "juvenil" or categoria == "adulto" or categoria == "master":
+                    break
+                else:
+                    print("Categoria incorrecta")
+
+            nuevo_participante = {
+                "numero": numero,
+                "nombre": nombre,
+                "edad": edad,
+                "categoria": categoria,
+            }
+
+            participantes.append(nuevo_participante)
+
+            break
+        else:
+            print("El participante ya existe")
+            numero = -1
+
+
+
 def quick_sort(lista):
     if len(lista) <= 1:
         return lista
@@ -16,40 +55,17 @@ while True:
     print("1. Agregar participantes")
     print("2. Mostrar participates ordenados por nombre")
     print("3. Mostrar participantes ordenados por edad")
-    print("4. Salir")
+    print("0. Salir")
 
     opcion = input("\nIngrese una opcion: ")
 
     match opcion:
         case "1":
+            print("## INGRESO DE PARTICIPANTES ##")
             cantidad = int(input("Ingrese la cantidad de participantes: "))
 
             for i in range(cantidad):
-                numero = int(input(f"Ingrese el numero de dorsal del participante {i+1}: "))
-
-                if numero not in participantes:
-                    nombre = input("Ingrese el nombre completo del participante: ")
-                    edad = int(input("Ingrese la edad del participante: "))
-
-                    while True:
-                        categoria = input("Ingrese la categoria del participante (juvenil/adulto/master): ")
-                        if categoria == "juvenil" or categoria == "adulto" or categoria == "master":
-                            break
-
-                    nuevo_participante = {
-                        "numero": numero,
-                        "nombre": nombre,
-                        "edad": edad,
-                        "categoria": categoria,
-                    }
-
-                    participantes.append(nuevo_participante)
-
-                else:
-                    print("El participante ya existe")
-
-            for participant in participantes:
-                print(participant)
+                ingreso_participates()
 
         case "2":
             print("\n## PARTICIPANTES ORDENADOS POR NOMBRE ##")
