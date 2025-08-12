@@ -1,3 +1,14 @@
+def menu():
+    print("\n## MENU DE OPCIONES ##")
+    print("1. Agregar participantes")
+    print("2. Mostrar participates ordenados por nombre")
+    print("3. Mostrar participantes ordenados por edad")
+    print("0. Salir")
+
+    opcion = input("\nIngrese una opcion: ")
+
+    return opcion
+
 def ingreso_participates():
     numero = -1
 
@@ -35,7 +46,20 @@ def ingreso_participates():
             print("El participante ya existe")
             numero = -1
 
+def ordenar_por_nombre():
+    nombres_ordenados = quick_sort([p['nombre'] for p in participantes])
+    for nombre in nombres_ordenados:
+        for p in participantes:
+            if p['nombre'] == nombre:
+                print(f"{p['nombre']} - Dorsal: {p['numero']}")
 
+
+def ordenar_por_edad():
+    edades_ordenadas = quick_sort([p['edad'] for p in participantes])
+    for edad in edades_ordenadas:
+        for p in participantes:
+            if p['edad'] == edad:
+                print(f"{p['nombre']} - Edad: {p['edad']} - Dorsal: {p['numero']}")
 
 def quick_sort(lista):
     if len(lista) <= 1:
@@ -51,36 +75,19 @@ def quick_sort(lista):
 participantes = []
 
 while True:
-    print("\n## MENU DE OPCIONES ##")
-    print("1. Agregar participantes")
-    print("2. Mostrar participates ordenados por nombre")
-    print("3. Mostrar participantes ordenados por edad")
-    print("0. Salir")
-
-    opcion = input("\nIngrese una opcion: ")
+    opcion = menu()
 
     match opcion:
         case "1":
             print("## INGRESO DE PARTICIPANTES ##")
             cantidad = int(input("Ingrese la cantidad de participantes: "))
-
             for i in range(cantidad):
                 ingreso_participates()
 
         case "2":
             print("\n## PARTICIPANTES ORDENADOS POR NOMBRE ##")
-
-            nombres_ordenados = quick_sort([p['nombre'] for p in participantes])
-            for nombre in nombres_ordenados:
-                for p in participantes:
-                    if p['nombre'] == nombre:
-                        print(f"{p['nombre']} - Dorsal: {p['numero']}")
+            ordenar_por_nombre()
 
         case "3":
             print("\n## PARTICIPANTES ORDENADOS POR EDAD ##")
-
-            edades_ordenadas = quick_sort([p['edad'] for p in participantes])
-            for edad in edades_ordenadas:
-                for p in participantes:
-                    if p['edad'] == edad:
-                        print(f"{p['nombre']} - Edad: {p['edad']} - Dorsal: {p['numero']}")
+            ordenar_por_edad()
